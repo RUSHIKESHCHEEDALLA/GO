@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "ibm ",
+    "content": "onboarding",
+    "author": "palak ",
+    "createdAt": "2026-02-10T00:12:19.528292+05:30",
+    "updatedAt": "2026-02-10T00:12:19.528292+05:30"
+  },
+  {
+    "id": 2,
+    "title": "go",
+    "content": "go learning",
+    "author": "hari",
+    "createdAt": "2026-02-10T00:12:45.65297+05:30",
+    "updatedAt": "2026-02-10T00:12:45.65297+05:30"
+  }
+]
