@@ -30,9 +30,15 @@ func postData(context *gin.Context) {
 
 }
 
+func getDataById(context *gin.Context) {
+	// blogs := Blogs.GetAllBlogs()
+
+}
+
 func main() {
 	ser := gin.Default()
 	ser.GET("/posts", getData)
+	ser.GET("/posts/%s", getDataById)
 	ser.POST("/posts", postData)
 	ser.Run(":8081")
 }
