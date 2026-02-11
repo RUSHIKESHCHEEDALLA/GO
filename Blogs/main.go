@@ -34,17 +34,29 @@ func saveBlogsToFile() {
 	file, _ := os.Create(filePath)
 	defer file.Close()
 
-	_, err := io.WriteString(file, string(jsonData))
+	_, err := file.Write(jsonData)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 }
 
+func GetID() int {
+	maxID := 0
+	for _, blog := range blogs {
+		if blog.Id > maxID {
+			maxID = blog.Id
+		}
+	}
+	return maxID + 1
+}
+
 func (b Blog) Save() {
 	loadBlogs()
 
-	b.Id = len(blogs) + 1
+	// b.Id = len(blogs) + 1
+	b.Id = GetID()
+
 	b.CreatedAt = time.Now()
 	b.UpdatedAt = time.Now()
 
@@ -55,4 +67,47 @@ func (b Blog) Save() {
 func GetAllBlogs() []Blog {
 	loadBlogs()
 	return blogs
+}
+
+func GetBlogByID(id int) (Blog, bool) {
+	loadBlogs()
+
+	for _, blog := range blogs {
+		if blog.Id == id {
+			return blog, true
+		}
+	}
+
+	return Blog{}, false
+}
+
+func UpdateBlogByID(id int, updated Blog) (Blog, bool) {
+	loadBlogs()
+
+	for i, blog := range blogs {
+		if blog.Id == id {
+			blogs[i].Title = updated.Title
+			blogs[i].Content = updated.Content
+			blogs[i].Author = updated.Author
+			blogs[i].UpdatedAt = time.Now()
+
+			saveBlogsToFile()
+			return blogs[i], true
+		}
+	}
+
+	return Blog{}, false
+}
+
+func DeleteBlogById(id int) bool {
+	loadBlogs()
+	for i, blog := range blogs {
+		if blog.Id == id {
+			blogs = append(blogs[:i], blogs[i+1:]...)
+			saveBlogsToFile()
+			return true
+		}
+
+	}
+	return false
 }

@@ -1,34 +1,34 @@
 [
   {
     "id": 1,
-    "title": "ibm ",
-    "content": "onboarding",
-    "author": "palak ",
-    "createdAt": "2026-02-10T00:12:19.528292+05:30",
-    "updatedAt": "2026-02-10T00:12:19.528292+05:30"
+    "title": " iam ",
+    "content": "ibm",
+    "author": "rushikesh chrk",
+    "createdAt": "2026-02-11T08:49:07.716823+05:30",
+    "updatedAt": "2026-02-11T08:49:07.716823+05:30"
   },
   {
     "id": 2,
-    "title": "go",
-    "content": "go learning",
-    "author": "hari",
-    "createdAt": "2026-02-10T00:12:45.65297+05:30",
-    "updatedAt": "2026-02-10T00:12:45.65297+05:30"
+    "title": " iam ",
+    "content": "ibm",
+    "author": "rajesh ",
+    "createdAt": "2026-02-11T08:49:36.334815+05:30",
+    "updatedAt": "2026-02-11T08:49:36.334816+05:30"
   },
   {
     "id": 3,
-    "title": "elections ",
-    "content": "muncipal elections ",
-    "author": "revanth ",
-    "createdAt": "2026-02-10T11:27:58.693763+05:30",
-    "updatedAt": "2026-02-10T11:27:58.693763+05:30"
+    "title": " iam ",
+    "content": "hpc",
+    "author": "sadana ",
+    "createdAt": "2026-02-11T08:50:02.503683+05:30",
+    "updatedAt": "2026-02-11T08:53:20.952078+05:30"
   },
   {
     "id": 4,
-    "title": "google meet",
-    "content": "data",
-    "author": "rajesh",
-    "createdAt": "2026-02-10T11:41:16.302377+05:30",
-    "updatedAt": "2026-02-10T11:41:16.302377+05:30"
+    "title": " iam ",
+    "content": "scc",
+    "author": " sailaga",
+    "createdAt": "2026-02-11T08:54:42.854343+05:30",
+    "updatedAt": "2026-02-11T08:54:42.854343+05:30"
   }
 ]
