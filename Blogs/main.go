@@ -56,6 +56,7 @@ func (b Blog) Save() {
 
 	// b.Id = len(blogs) + 1
 	b.Id = GetID()
+	// fmt.Printf("%T", uuid.NewString())
 
 	b.CreatedAt = time.Now()
 	b.UpdatedAt = time.Now()
