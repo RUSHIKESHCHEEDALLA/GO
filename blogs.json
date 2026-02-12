@@ -1,66 +1,34 @@
 [
   {
-    "id": 2,
-    "title": " iam ",
-    "content": "ibm",
-    "author": "rajesh ",
-    "createdAt": "2026-02-11T08:49:36.334815+05:30",
-    "updatedAt": "2026-02-11T08:49:36.334816+05:30"
-  },
-  {
     "id": 3,
-    "title": " iam ",
-    "content": "hpc",
-    "author": "sadana ",
-    "createdAt": "2026-02-11T08:50:02.503683+05:30",
-    "updatedAt": "2026-02-11T08:53:20.952078+05:30"
+    "title": "iamm",
+    "content": "ibm",
+    "author": "rajesh",
+    "createdAt": "2026-02-12T11:43:29.144486+05:30",
+    "updatedAt": "2026-02-12T11:43:29.144486+05:30"
   },
   {
     "id": 4,
-    "title": " iam ",
-    "content": "scc",
-    "author": " sailaga",
-    "createdAt": "2026-02-11T08:54:42.854343+05:30",
-    "updatedAt": "2026-02-11T08:54:42.854343+05:30"
+    "title": "iamm",
+    "content": "ibm",
+    "author": "rajesh",
+    "createdAt": "2026-02-12T12:01:50.127474+05:30",
+    "updatedAt": "2026-02-12T12:01:50.127474+05:30"
   },
   {
     "id": 5,
-    "title": " iam ",
-    "content": "sccc",
-    "author": " sailaga",
-    "createdAt": "2026-02-11T19:55:07.080157+05:30",
-    "updatedAt": "2026-02-11T19:55:07.080157+05:30"
+    "title": "iamm",
+    "content": "ibm",
+    "author": "rajesh",
+    "createdAt": "2026-02-12T12:02:04.372164+05:30",
+    "updatedAt": "2026-02-12T12:02:04.372165+05:30"
   },
   {
     "id": 6,
-    "title": " iam ",
-    "content": "sccc",
-    "author": " roha",
-    "createdAt": "2026-02-11T19:58:56.137643+05:30",
-    "updatedAt": "2026-02-11T19:58:56.137643+05:30"
-  },
-  {
-    "id": 7,
-    "title": " iam ",
-    "content": "sc",
-    "author": " roha",
-    "createdAt": "2026-02-11T20:01:08.396454+05:30",
-    "updatedAt": "2026-02-11T20:01:08.396454+05:30"
-  },
-  {
-    "id": 8,
-    "title": " iam ",
+    "title": "iamm",
     "content": "ibm",
     "author": "rajesh",
-    "createdAt": "2026-02-11T20:17:41.157147+05:30",
-    "updatedAt": "2026-02-11T20:17:41.157147+05:30"
-  },
-  {
-    "id": 9,
-    "title": " iam ",
-    "content": "ibm",
-    "author": "rajesh",
-    "createdAt": "2026-02-11T20:18:21.639558+05:30",
-    "updatedAt": "2026-02-11T20:18:21.639558+05:30"
+    "createdAt": "2026-02-12T12:04:02.324496+05:30",
+    "updatedAt": "2026-02-12T12:04:02.324496+05:30"
   }
 ]

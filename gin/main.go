@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 	"strconv"
+	"time"
 
 	"example.com/hello/Desktop/task1/Blogs"
 	"github.com/gin-gonic/gin"
@@ -27,6 +28,8 @@ func postData(context *gin.Context) {
 	blog.Save()
 	// println(Blogs.GetID() - 1)
 	blog.Id = Blogs.GetID() - 1
+	blog.CreatedAt = time.Now()
+	blog.UpdatedAt = time.Now()
 	context.JSON(http.StatusCreated, blog)
 
 }
@@ -55,6 +58,7 @@ func updateData(context *gin.Context) {
 		return
 	}
 	updatedblog.Id = id
+	updatedblog.UpdatedAt = time.Now()
 
 	data, found := Blogs.UpdateBlogByID(id, updatedblog)
 	if !found {
@@ -71,19 +75,19 @@ func deleteData(context *gin.Context) {
 
 	found := Blogs.DeleteBlogById(id)
 	if !found {
-		context.JSON(http.StatusNotFound, "error Blog not found")
+		context.JSON(http.StatusNotFound, gin.H{"404": "error Blog not found"})
 		return
 	}
-	context.JSON(http.StatusFound, "blog deleted ")
+	context.JSON(http.StatusFound, gin.H{"201": "blog delted succesfully"})
 
 }
 
 func main() {
 	ser := gin.Default()
-	ser.GET("/getblogs", getData)
-	ser.GET("/getblogs/:id", getDataById)
-	ser.POST("/postblogs", postData)
-	ser.PUT("/updateblogs/:id", updateData)
-	ser.DELETE("/deleteblogs/:id", deleteData)
+	ser.GET("/get", getData)
+	ser.GET("/get/:id", getDataById)
+	ser.POST("/post", postData)
+	ser.PUT("/update/:id", updateData)
+	ser.DELETE("/delete/:id", deleteData)
 	ser.Run(":8081")
 }

@@ -54,13 +54,7 @@ func GetID() int {
 func (b Blog) Save() {
 	loadBlogs()
 
-	// b.Id = len(blogs) + 1
 	b.Id = GetID()
-	// fmt.Printf("%T", uuid.NewString())
-
-	b.CreatedAt = time.Now()
-	b.UpdatedAt = time.Now()
-
 	blogs = append(blogs, b)
 	saveBlogsToFile()
 }
