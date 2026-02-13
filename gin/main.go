@@ -21,15 +21,20 @@ func postData(context *gin.Context) {
 	err := context.ShouldBindJSON(&blog)
 
 	if err != nil {
-		context.JSON(http.StatusInternalServerError, "error ")
+		context.JSON(http.StatusInternalServerError, gin.H{"404": "error Blog not found"})
+		return
+	}
+	if blog.Title == "" || blog.Content == "" || blog.Author == "" {
+		context.JSON(http.StatusBadRequest, gin.H{"400": "Missing fields"})
 		return
 	}
 
-	blog.Save()
 	// println(Blogs.GetID() - 1)
-	blog.Id = Blogs.GetID() - 1
+
 	blog.CreatedAt = time.Now()
 	blog.UpdatedAt = time.Now()
+	blog.Save()
+	blog.Id = Blogs.GetID() - 1
 	context.JSON(http.StatusCreated, blog)
 
 }
@@ -39,7 +44,7 @@ func getDataById(context *gin.Context) {
 	context.JSON(http.StatusCreated, id)
 	data, found := Blogs.GetBlogByID(id)
 	if !found {
-		context.JSON(http.StatusNotFound, "error Blog not found")
+		context.JSON(http.StatusNotFound, gin.H{"404": "error Blog not found"})
 		return
 	}
 
@@ -54,7 +59,11 @@ func updateData(context *gin.Context) {
 	err := context.ShouldBindJSON(&updatedblog)
 
 	if err != nil {
-		context.JSON(http.StatusInternalServerError, "error ")
+		context.JSON(http.StatusInternalServerError, gin.H{"500": "internal server error"})
+		return
+	}
+	if updatedblog.Title == "" || updatedblog.Content == "" || updatedblog.Author == "" {
+		context.JSON(http.StatusBadRequest, gin.H{"400": "Missing fields"})
 		return
 	}
 	updatedblog.Id = id
@@ -62,7 +71,7 @@ func updateData(context *gin.Context) {
 
 	data, found := Blogs.UpdateBlogByID(id, updatedblog)
 	if !found {
-		context.JSON(http.StatusNotFound, "error Blog not found")
+		context.JSON(http.StatusNotFound, gin.H{"404": "error Blog not found"})
 		return
 	}
 	context.JSON(http.StatusFound, data)
@@ -78,7 +87,7 @@ func deleteData(context *gin.Context) {
 		context.JSON(http.StatusNotFound, gin.H{"404": "error Blog not found"})
 		return
 	}
-	context.JSON(http.StatusFound, gin.H{"201": "blog delted succesfully"})
+	context.JSON(http.StatusFound, gin.H{"200": "blog delted succesfully"})
 
 }
 
