@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"time"
 
-	blogs "example.com/hello/Desktop/task1/blogspsql"
+	blogs "example.com/hello/Desktop/task1/Blogspsql"
 	"example.com/hello/Desktop/task1/db"
 	"github.com/gin-gonic/gin"
 )
