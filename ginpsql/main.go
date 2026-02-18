@@ -5,19 +5,39 @@ import (
 	"strconv"
 	"time"
 
-	"example.com/hello/Desktop/task1/Blogs"
+	blogs "example.com/hello/Desktop/task1/blogspsql"
+	"example.com/hello/Desktop/task1/db"
 	"github.com/gin-gonic/gin"
 )
 
-func getData(context *gin.Context) {
+func getBlogs(c *gin.Context) {
 
-	blogs := Blogs.GetAllBlogs()
+	blogs, err := blogs.GetAllBlogs()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "failed to fetch blogs",
+		})
+		return
+	}
 
-	context.JSON(http.StatusOK, blogs)
+	c.JSON(http.StatusOK, blogs)
+}
+
+func getDataById(context *gin.Context) {
+	id, _ := strconv.Atoi(context.Param("id"))
+	context.JSON(http.StatusCreated, id)
+	data, err := blogs.GetBlogByID(id)
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{"404": "could not fetch event id  "})
+		return
+	}
+
+	context.JSON(http.StatusFound, data)
+
 }
 
 func postData(context *gin.Context) {
-	var blog Blogs.Blog
+	var blog blogs.Blog
 	err := context.ShouldBindJSON(&blog)
 
 	if err != nil {
@@ -34,43 +54,32 @@ func postData(context *gin.Context) {
 	blog.CreatedAt = time.Now()
 	blog.UpdatedAt = time.Now()
 	blog.Save()
-	blog.Id = Blogs.GetID() - 1
+	// blog.Id = Blogs.GetID() - 1
 	context.JSON(http.StatusCreated, blog)
-
-}
-
-func getDataById(context *gin.Context) {
-	id, _ := strconv.Atoi(context.Param("id"))
-	context.JSON(http.StatusCreated, id)
-	data, found := Blogs.GetBlogByID(id)
-	if !found {
-		context.JSON(http.StatusNotFound, gin.H{"404": "error Blog not found"})
-		return
-	}
-
-	context.JSON(http.StatusFound, data)
 
 }
 
 func updateData(context *gin.Context) {
 	id, _ := strconv.Atoi(context.Param("id"))
 	context.JSON(http.StatusCreated, id)
-	var updatedblog Blogs.Blog
-	err := context.ShouldBindJSON(&updatedblog)
 
+	var updatedblog blogs.Blog
+	err := context.ShouldBindJSON(&updatedblog)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"500": "internal server error"})
 		return
 	}
+
 	if updatedblog.Title == "" || updatedblog.Content == "" || updatedblog.Author == "" {
 		context.JSON(http.StatusBadRequest, gin.H{"400": "Missing fields"})
 		return
 	}
+
 	updatedblog.Id = id
 	updatedblog.UpdatedAt = time.Now()
 
-	data, found := Blogs.UpdateBlogByID(id, updatedblog)
-	if !found {
+	data, err := blogs.UpdateBlogByID(updatedblog)
+	if err != nil {
 		context.JSON(http.StatusNotFound, gin.H{"404": "error Blog not found"})
 		return
 	}
@@ -82,8 +91,8 @@ func deleteData(context *gin.Context) {
 	id, _ := strconv.Atoi(context.Param("id"))
 	context.JSON(http.StatusCreated, id)
 
-	found := Blogs.DeleteBlogById(id)
-	if !found {
+	err := blogs.DeleteBlogById(id)
+	if err != nil {
 		context.JSON(http.StatusNotFound, gin.H{"404": "error Blog not found"})
 		return
 	}
@@ -92,11 +101,16 @@ func deleteData(context *gin.Context) {
 }
 
 func main() {
-	ser := gin.Default()
-	ser.GET("/blog", getData)
-	ser.GET("/blog/:id", getDataById)
-	ser.POST("/blog", postData)
-	ser.PUT("/blog/:id", updateData)
-	ser.DELETE("/blog/:id", deleteData)
-	ser.Run(":8081")
+
+	db.InitDB()
+
+	router := gin.Default()
+
+	router.GET("/blog", getBlogs)
+	router.GET("/blog/:id", getDataById)
+	router.POST("/blog", postData)
+	router.PUT("/blog/:id", updateData)
+	router.DELETE("/blog/:id", deleteData)
+
+	router.Run(":3031")
 }
